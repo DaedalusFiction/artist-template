@@ -36,14 +36,16 @@ const FirestoreListingItem = ({
         setIsExpanded(false);
     };
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
+        setIsUpdating(true);
         let urls = image.data().URLs;
         urls.forEach((url) => {
             deleteObject(ref(storage, url));
         });
-        deleteDoc(doc(db, category, image.id));
+        await deleteDoc(doc(db, category, image.id));
         setUpdateCounter(updateCounter + 1);
         setShownImages([]);
+        setIsUpdating(false);
     };
 
     const handleUpdate = async () => {
