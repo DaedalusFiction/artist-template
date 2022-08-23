@@ -1,9 +1,11 @@
 import { Box, Typography } from "@mui/material";
+import { collection, getDocs } from "firebase/firestore";
 import Head from "next/head";
 import React from "react";
-import Gallery from "../components/Gallery";
+import Gallery from "../../components/Gallery";
+import { db } from "../../firebase";
 
-const Art = () => {
+const Art = ({ images }) => {
     return (
         <>
             <Head>
@@ -18,13 +20,28 @@ const Art = () => {
                     Artwork
                 </Typography>
                 <Typography sx={{ paddingBottom: "2em" }}>
-                    IMAGES LOAD ON CLICK TO CONSERVE ENERGY
+                    UNIQUE PIECES OF ART
                 </Typography>
             </Box>
             <br />
-            <Gallery category="artwork" />
+            <Gallery images={images} category="artwork" />
         </>
     );
+};
+
+export const getStaticProps = async () => {
+    const docsSnap = await getDocs(collection(db, "artwork"));
+    let images = [];
+    docsSnap.docs.forEach((doc, index) => {
+        images = [...images, doc.data()];
+        // console.log(doc.data());
+    });
+
+    return {
+        props: {
+            images,
+        }, // will be passed to the page component as props
+    };
 };
 
 export default Art;

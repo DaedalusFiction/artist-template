@@ -2,11 +2,11 @@ import { Button, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import Head from "next/head";
-import login from "../utility/login.js";
+import login from "../../utility/login.js";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase.js";
-import FirebaseUploadForm from "../components/FirebaseUploadForm.js";
-import FirestoreListing from "../components/FirestoreListing.js";
+import { db } from "../../firebase.js";
+import FirebaseUploadForm from "../../components/FirebaseUploadForm.js";
+import FirestoreListing from "../../components/FirestoreListing.js";
 
 const artConfig = {
     category: "artwork",

@@ -14,7 +14,7 @@ import lightTheme from "../styles/themes/lightTheme";
 import { useState } from "react";
 import { navigateToTop } from "../utility/navigateToTop";
 
-const pages = ["about", "clothing", "art"];
+const pages = ["about", "clothing", "artwork"];
 const artistName = "SHANDON BLACK";
 
 const activeStyle = {

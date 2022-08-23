@@ -75,34 +75,6 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={12} md={1}>
                     <Box></Box>
-                    {/* <Box
-                        sx={{
-                            transform: "rotate(45deg)",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            height: "100%",
-                            backgroundColor: "white",
-                            padding: "1rem",
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                border: "1px solid white",
-                                transform: "rotate(45deg)",
-                                // borderRadius: "100%",
-                                width: "5vw",
-                                height: "5vw",
-                                backgroundColor: "black",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                fontSize: "1.5rem",
-                            }}
-                        >
-                            <Link href="/about">?</Link>
-                        </Box>
-                    </Box> */}
                 </Grid>
                 <Grid
                     item
@@ -117,7 +89,7 @@ export default function Home() {
                     }}
                 >
                     <Typography variant="h2">
-                        <Link href="/art">ART</Link>
+                        <Link href="/artwork">ART</Link>
                     </Typography>
                 </Grid>
             </Grid>

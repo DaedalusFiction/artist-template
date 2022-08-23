@@ -1,10 +1,12 @@
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { collection, getDocs } from "firebase/firestore";
 import Head from "next/head";
 import React from "react";
-import Gallery from "../components/Gallery";
+import Gallery from "../../components/Gallery";
+import { db } from "../../firebase";
 
-const clothing = () => {
+const clothing = ({ images }) => {
     return (
         <>
             <Head>
@@ -19,13 +21,28 @@ const clothing = () => {
                     Wearable Sculptures
                 </Typography>
                 <Typography sx={{ paddingBottom: "2em" }}>
-                    IMAGES LOAD ON CLICK TO CONSERVE ENERGY
+                    HAND-MADE CLOTHING
                 </Typography>
             </Box>
             <br />
-            <Gallery category="clothing" />
+            <Gallery images={images} category="clothing" />
         </>
     );
+};
+
+export const getStaticProps = async () => {
+    const docsSnap = await getDocs(collection(db, "clothing"));
+    let images = [];
+    docsSnap.docs.forEach((doc, index) => {
+        images = [...images, doc.data()];
+        // console.log(doc.data());
+    });
+
+    return {
+        props: {
+            images,
+        }, // will be passed to the page component as props
+    };
 };
 
 export default clothing;

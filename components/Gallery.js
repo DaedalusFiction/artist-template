@@ -1,10 +1,8 @@
 import { Box, Grid } from "@mui/material";
 import React from "react";
-import useGetImages from "../hooks/useGetImages";
 import GalleryImage from "./GalleryImage";
 
-const Gallery = ({ category }) => {
-    const [images] = useGetImages(category);
+const Gallery = ({ images }) => {
     return (
         <Box sx={{ padding: "3rem 0" }}>
             <Grid container spacing={2}>

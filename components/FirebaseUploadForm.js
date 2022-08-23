@@ -8,7 +8,6 @@ import React from "react";
 import { useRef } from "react";
 import { useState } from "react";
 import { db, storage } from "../firebase";
-import clothing from "../pages/clothing";
 
 const FirebaseUploadForm = ({ config, updateCounter, setUpdateCounter }) => {
     const [formData, setFormData] = useState(
@@ -32,6 +31,7 @@ const FirebaseUploadForm = ({ config, updateCounter, setUpdateCounter }) => {
     };
 
     const handleImagesChange = (e) => {
+        setFileError("false");
         if (e.target.files[0].size > 1097152) {
             setFileError("File size must be less than 1MB");
             return;
@@ -101,7 +101,6 @@ const FirebaseUploadForm = ({ config, updateCounter, setUpdateCounter }) => {
 
             return;
         } else {
-            console.log("uploading");
             setIsUploading(true);
             selectedImages.forEach(async (image) => {
                 const storageRef = ref(
@@ -134,6 +133,7 @@ const FirebaseUploadForm = ({ config, updateCounter, setUpdateCounter }) => {
                                 ) {
                                     addDoc(collection(db, formData.category), {
                                         ...formData,
+                                        id: formData.fields[0].value,
                                         URLs: downloadURLs,
                                         uploaded: Date.now(),
                                     });
@@ -243,7 +243,7 @@ const FirebaseUploadForm = ({ config, updateCounter, setUpdateCounter }) => {
             >
                 {isUploading ? "Uploading..." : "Submit"}
             </Button>
-            <Typography>{fileError}</Typography>
+            {fileError !== "false" && <Typography>{fileError}</Typography>}
         </Box>
     );
 };
