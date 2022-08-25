@@ -14,6 +14,7 @@ import { deleteObject, getStorage, ref } from "firebase/storage";
 import { db, storage } from "../firebase";
 import { deleteDoc, doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
+import ButtonWithConfirm from "./ButtonWithConfirm";
 
 const FirestoreListingItem = ({
     image,
@@ -125,14 +126,12 @@ const FirestoreListingItem = ({
                             >
                                 update
                             </Button>
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                onClick={handleDelete}
-                                disabled={isUpdating}
-                            >
-                                delete
-                            </Button>
+                            <ButtonWithConfirm
+                                handleClick={handleDelete}
+                                dialogText="Are you sure you want to delete this item permanently?"
+                                buttonText="delete"
+                                isDisabled={isUpdating}
+                            />
                         </Box>
                         <IconButton
                             variant="contained"

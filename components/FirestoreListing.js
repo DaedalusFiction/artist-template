@@ -1,6 +1,5 @@
 import { Box, Input, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { useEffect } from "react";
 import useGetImages from "../hooks/useGetImages";
 import FirestoreListingItem from "./FirestoreListingItem";
 
@@ -25,13 +24,14 @@ const FirestoreListing = ({ category, updateCounter, setUpdateCounter }) => {
                 Delete {category} database entries
             </Typography>
             <Box sx={{ display: "flex", alignItems: "end", gap: ".5em" }}>
-                <Typography>Search:</Typography>
+                <Typography>Search for item ID:</Typography>
                 <Input
                     color="secondary"
                     type="text"
                     onChange={handleSearchChange}
                 />
             </Box>
+            <br />
             {shownImages &&
                 shownImages.length > 0 &&
                 shownImages.map((image, index) => {
@@ -47,7 +47,7 @@ const FirestoreListing = ({ category, updateCounter, setUpdateCounter }) => {
                     );
                 })}
             {shownImages && shownImages.length === 0 && (
-                <Typography>No listings to show</Typography>
+                <Typography>(No items match ID)</Typography>
             )}
         </>
     );

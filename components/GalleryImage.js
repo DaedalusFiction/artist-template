@@ -5,12 +5,11 @@ import { Grid, Typography } from "@mui/material";
 import Link from "next/link";
 
 const GalleryImage = ({ image }) => {
-    const [isVisible, setIsVisible] = useState(false);
     const [ratio, setRatio] = useState(1 / 1); // default to 16:9
 
     return (
         <Box>
-            <Link href={`/${image.category}/${image.uploaded}`}>
+            <Link href={`/${image.category}/${image.id}`}>
                 <Box>
                     <Image
                         src={image.URLs[0]}

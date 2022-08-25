@@ -1,13 +1,15 @@
 import { DocumentScanner } from "@mui/icons-material";
 import { Button, Grid, Input, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { addDoc, collection, getDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import Image from "next/image";
 import React from "react";
 import { useRef } from "react";
 import { useState } from "react";
 import { db, storage } from "../firebase";
+import ButtonWithConfirm from "./ButtonWithConfirm";
+import Notification from "./Notification";
 
 const FirebaseUploadForm = ({ config, updateCounter, setUpdateCounter }) => {
     const [formData, setFormData] = useState(
@@ -66,11 +68,10 @@ const FirebaseUploadForm = ({ config, updateCounter, setUpdateCounter }) => {
         setSelectedImages(newSelectedImages);
     };
 
-    const handleUpload = async (e) => {
+    const handleUpload = async () => {
         if (selectedImages.length === 0) {
             return;
         }
-        e.preventDefault();
         var downloadURLs = [];
         let error = false;
 
@@ -131,12 +132,19 @@ const FirebaseUploadForm = ({ config, updateCounter, setUpdateCounter }) => {
                                 if (
                                     downloadURLs.length >= selectedImages.length
                                 ) {
-                                    addDoc(collection(db, formData.category), {
-                                        ...formData,
-                                        id: formData.fields[0].value,
-                                        URLs: downloadURLs,
-                                        uploaded: Date.now(),
-                                    });
+                                    setDoc(
+                                        doc(
+                                            db,
+                                            formData.category,
+                                            formData.fields[0].value
+                                        ),
+                                        {
+                                            ...formData,
+                                            id: formData.fields[0].value,
+                                            URLs: downloadURLs,
+                                            uploaded: Date.now(),
+                                        }
+                                    );
                                 }
 
                                 setFormData(JSON.parse(JSON.stringify(config)));
@@ -235,14 +243,13 @@ const FirebaseUploadForm = ({ config, updateCounter, setUpdateCounter }) => {
                         );
                     })}
             </Grid>
-            <Button
-                variant="contained"
-                color="secondary"
-                onClick={handleUpload}
-                disabled={isUploading}
-            >
-                {isUploading ? "Uploading..." : "Submit"}
-            </Button>
+
+            <ButtonWithConfirm
+                handleClick={handleUpload}
+                isDisabled={isUploading}
+                buttonText="Upload"
+                dialogText="Are you sure you want to upload this item?"
+            />
             {fileError !== "false" && <Typography>{fileError}</Typography>}
         </Box>
     );

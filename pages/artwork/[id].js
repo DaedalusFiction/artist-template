@@ -1,15 +1,11 @@
 import { Button } from "@mui/material";
 import React from "react";
+import Post from "../../components/Post";
 
 const artImage = ({ params }) => {
-    const handleClick = () => {
-        console.log(params);
-    };
     return (
         <div>
-            <Button color="secondary" onClick={handleClick}>
-                test
-            </Button>
+            <Post />
         </div>
     );
 };
