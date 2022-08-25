@@ -34,13 +34,12 @@ export const getStaticProps = async () => {
     let images = [];
     docsSnap.docs.forEach((doc, index) => {
         images = [...images, doc.data()];
-        // console.log(doc.data());
     });
 
     return {
         props: {
             images,
-        }, // will be passed to the page component as props
+        },
     };
 };
 

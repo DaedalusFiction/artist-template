@@ -10,7 +10,13 @@ const GalleryImage = ({ image }) => {
     return (
         <Box>
             <Link href={`/${image.category}/${image.id}`}>
-                <Box>
+                <Box
+                    className="link"
+                    sx={{
+                        transition: "300ms",
+                        "&:hover": { filter: "brightness(60%)" },
+                    }}
+                >
                     <Image
                         src={image.URLs[0]}
                         blurDataURL={image}
@@ -27,30 +33,6 @@ const GalleryImage = ({ image }) => {
                     />
                 </Box>
             </Link>
-            <Box>
-                {image.fields.map((field, index) => {
-                    return (
-                        <Grid container key={index}>
-                            <Grid item xs={4}>
-                                <Typography
-                                    variant="subtitle2"
-                                    sx={{ fontWeight: "bold" }}
-                                >
-                                    {field.name}:
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <Typography
-                                    variant="subtitle2"
-                                    sx={{ whiteSpace: "pre-wrap" }}
-                                >
-                                    {field.value.trim()}
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    );
-                })}
-            </Box>
         </Box>
     );
 };

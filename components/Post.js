@@ -19,7 +19,6 @@ const Post = () => {
             const imageRef = doc(db, category, params.id);
             console.log("ID", params.id);
             const getTask = await getDoc(imageRef);
-            console.log(getTask);
             setImage(getTask.data());
         }
         getImage();
@@ -29,9 +28,9 @@ const Post = () => {
             <Typography variant="h1" sx={{ margin: ".5rem 0" }}>
                 {params.id}
             </Typography>
-            <Grid container spacing={4}>
-                <Grid item xs={12} md={8}>
-                    {image && (
+            {image && (
+                <Grid container spacing={4}>
+                    <Grid item xs={12} md={8}>
                         <Image
                             src={image.URLs[0]}
                             blurDataURL={image}
@@ -47,35 +46,35 @@ const Post = () => {
                             layout="responsive"
                             alt={image.description}
                         />
-                    )}
-                </Grid>
-                <Grid item xs={12} md={4}>
-                    <Box>
-                        {image.fields.map((field, index) => {
-                            return (
-                                <Grid container key={index}>
-                                    <Grid item xs={4}>
-                                        <Typography
-                                            variant="subtitle2"
-                                            sx={{ fontWeight: "bold" }}
-                                        >
-                                            {field.name}:
-                                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <Box>
+                            {image.fields.map((field, index) => {
+                                return (
+                                    <Grid container key={index}>
+                                        <Grid item xs={4}>
+                                            <Typography
+                                                variant="subtitle2"
+                                                sx={{ fontWeight: "bold" }}
+                                            >
+                                                {field.name}:
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={8}>
+                                            <Typography
+                                                variant="subtitle2"
+                                                sx={{ whiteSpace: "pre-wrap" }}
+                                            >
+                                                {field.value.trim()}
+                                            </Typography>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={8}>
-                                        <Typography
-                                            variant="subtitle2"
-                                            sx={{ whiteSpace: "pre-wrap" }}
-                                        >
-                                            {field.value.trim()}
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            );
-                        })}
-                    </Box>
+                                );
+                            })}
+                        </Box>
+                    </Grid>
                 </Grid>
-            </Grid>
+            )}
         </Box>
     );
 };

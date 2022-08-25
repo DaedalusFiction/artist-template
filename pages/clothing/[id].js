@@ -1,7 +1,8 @@
 import React from "react";
+import Post from "../../components/Post";
 
 const clothingImage = () => {
-    return <div>clothingImage</div>;
+    return <Post />;
 };
 
 export default clothingImage;
