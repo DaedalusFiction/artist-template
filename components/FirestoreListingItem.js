@@ -53,6 +53,7 @@ const FirestoreListingItem = ({
         setIsUpdating(true);
         const docRef = doc(db, category, image.id);
         await setDoc(docRef, formData).then(() => {
+            setIsExpanded(false);
             setIsUpdating(false);
         });
     };
@@ -90,6 +91,9 @@ const FirestoreListingItem = ({
                         border: "1px solid white",
                         padding: ".5em",
                         margin: ".5em 0",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: ".5em",
                     }}
                 >
                     {image &&
@@ -118,18 +122,18 @@ const FirestoreListingItem = ({
                         }}
                     >
                         <Box sx={{ display: "flex", gap: "1em" }}>
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                onClick={handleUpdate}
-                                disabled={isUpdating}
-                            >
-                                update
-                            </Button>
+                            <ButtonWithConfirm
+                                handleClick={handleUpdate}
+                                isDisabled={isUpdating}
+                                dialogText="Are you sure you want to update this item?"
+                                buttonText="update"
+                                notificationText="Item Updated!"
+                            />
                             <ButtonWithConfirm
                                 handleClick={handleDelete}
                                 dialogText="Are you sure you want to delete this item permanently?"
                                 buttonText="delete"
+                                notificationText="Item Deleted!"
                                 isDisabled={isUpdating}
                             />
                         </Box>

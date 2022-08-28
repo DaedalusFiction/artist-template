@@ -21,7 +21,7 @@ const FirestoreListing = ({ category, updateCounter, setUpdateCounter }) => {
     return (
         <>
             <Typography variant="h5">
-                Delete {category} database entries
+                Update or Delete {category} database entries
             </Typography>
             <Box sx={{ display: "flex", alignItems: "end", gap: ".5em" }}>
                 <Typography>Search for item ID:</Typography>

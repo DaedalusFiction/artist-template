@@ -36,7 +36,7 @@ export default function Notification({ message, open, setOpen }) {
                 action={action}
                 sx={{
                     "& .MuiSnackbarContent-root": {
-                        backgroundColor: "rgb(153, 0, 51)",
+                        backgroundColor: "#27ab27",
                     },
                 }}
             />

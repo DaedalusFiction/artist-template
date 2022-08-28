@@ -9,7 +9,6 @@ import { useRef } from "react";
 import { useState } from "react";
 import { db, storage } from "../firebase";
 import ButtonWithConfirm from "./ButtonWithConfirm";
-import Notification from "./Notification";
 
 const FirebaseUploadForm = ({ config, updateCounter, setUpdateCounter }) => {
     const [formData, setFormData] = useState(
@@ -249,6 +248,7 @@ const FirebaseUploadForm = ({ config, updateCounter, setUpdateCounter }) => {
                 isDisabled={isUploading}
                 buttonText="Upload"
                 dialogText="Are you sure you want to upload this item?"
+                notificationText="File Successfully Uploaded!"
             />
             {fileError !== "false" && <Typography>{fileError}</Typography>}
         </Box>

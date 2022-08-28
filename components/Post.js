@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -13,7 +13,6 @@ const Post = () => {
     const [image, setImage] = useState(null);
     const [ratio, setRatio] = useState(1 / 1); // default to 16:9
 
-    const handleClick = () => {};
     useEffect(() => {
         async function getImage() {
             const imageRef = doc(db, category, params.id);

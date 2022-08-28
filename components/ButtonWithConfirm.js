@@ -8,14 +8,17 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { deleteObject, ref } from "firebase/storage";
 import { useState } from "react";
 import { db, storage } from "../firebase";
+import Notification from "./Notification";
 
 export default function ButtonWithConfirm({
     buttonText,
     dialogText,
+    notificationText,
     handleClick,
     isDisabled,
 }) {
     const [dialogIsOpen, setDialogIsOpen] = useState(false);
+    const [notificationOpen, setNotificationOpen] = useState(false);
 
     const handleClickOpen = () => {
         setDialogIsOpen(true);
@@ -28,6 +31,7 @@ export default function ButtonWithConfirm({
     const handleYes = async () => {
         handleClick();
         setDialogIsOpen(false);
+        setNotificationOpen(true);
         // setUpdateCounter(updateCounter + 1);
     };
 
@@ -62,6 +66,11 @@ export default function ButtonWithConfirm({
                     </Button>
                 </DialogActions>
             </Dialog>
+            <Notification
+                open={notificationOpen}
+                setOpen={setNotificationOpen}
+                message={notificationText}
+            />
         </div>
     );
 }
